@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Book>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>List of Books</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Автор @Html.ActionLink("⇅", "Index", new { sort = "Author" })
+            </th>
+            <th>
+                Название @Html.ActionLink("⇅", "Index", new { sort = "Title" })
+            </th>
+            <th>
+                Дата публикации @Html.ActionLink("⇅", "Index", new { sort = "Date" })
+            </th>
+            <th></th>
+        </tr>
+
+        @* <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DatePublication)
+            </th>
+            <th></th>
+        </tr> *@
+
+    </thead>
+    <tbody>
+
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td>@book.Author</td>
+                <td>@book.Title</td>
+                <td>@book.DatePublication.ToString("yyyy-MM-dd")</td>
+                <td>
+                    <form asp-action="BuyBook" asp-route-id="@book.Id">
+                        <button type="submit">Купить</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
